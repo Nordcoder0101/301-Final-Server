@@ -23,7 +23,7 @@ app.use(cors());
 
 app.get('/api/v1/weather', (req, res) => {
   superAgent.get(`https://api.darksky.net/forecast/68bbafb8dd37fc79325853a950cf330b/-47.6062,122.3321`)
-    .then( data => console.log(data))
+    .then( data => {return res.send(data)})
 });
 
 
