@@ -53,9 +53,9 @@ app.get('/api/v1/accounts', (req, res) => {
     .catch(console.error);
 });
 
-app.post('/api/v1/books/', (req) => {
-  client.query(`INSERT INTO books (title, author, image_url, isbn) VALUES ($!, $2, $3, $4);`, [req.params.title, req.params.author, req.params.image_url, req.params.isbn]);
-});
+// app.post('/api/v1/books/', (req) => {
+//   client.query(`INSERT INTO books (title, author, image_url, isbn) VALUES ($!, $2, $3, $4);`, [req.params.title, req.params.author, req.params.image_url, req.params.isbn]);
+// });
 
   
 
