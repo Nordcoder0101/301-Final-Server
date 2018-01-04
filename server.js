@@ -11,7 +11,6 @@ const superAgent = require('superagent');
 const app = express();  
 const PORT = process.env.PORT;
 //this next line of coded added from scots lecture example
-// const DATABASE_URL = process.env.DATABASE_URL;
 const DATABASE_URL = process.env.DATABASE_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
 
@@ -23,28 +22,20 @@ const CLIENT_URL = process.env.CLIENT_URL;
 app.use(cors());
 
 app.get('/api/v1/weather', (req, res) => {
-  console.log(req.query)
-  superAgent.get(`https://api.darksky.net/forecast/68bbafb8dd37fc79325853a950cf330b/${req.query.a},${req.query.b}`)
-    .then( data => {return res.send(data)})
+  superAgent.get(`https://api.darksky.net/forecast/68bbafb8dd37fc79325853a950cf330b/-47.6062,122.3321`)
+    .then( data => console.log(data))
 });
 
 
-//this does nothing for us
-// app.get('/api/v1/location', (req, res) => {
-//   superAgent.get(`http://maps.googleapis.com/maps/api/geocode/json?address=98125`)
-//   .then(results => console.log(results))  
-//   .then( results => {return res.send(results)})
-// });
+app.get('/accounts', (req, res) => {
+  client.query(`SELECT id, name, email, zip;`)
+    .then(results => res.send(results.rows))
+    .catch(console.error);
+});
 
-
-// app.get('/accounts', (req, res) => {
-//   client.query(`SELECT id, name, email, zip;`)
-//     .then(results => res.send(results.rows))
-//     .catch(console.error);
-// });
-
-app.get('/api/v1/accounts', (req, res) => {
-  client.query(`SELECT * FROM accounts;`)
+app.get('/api/v1/books/:id', (req, res) => {
+  console.log(req.params.id);
+  client.query(`SELECT * FROM books WHERE book_id=$1;`, [req.params.id])
     .then(result => {
       console.log(result.rows);
       return res.send(result.rows);
@@ -64,13 +55,13 @@ app.post('/api/v1/newaccount/', (req, res) => {
     return res.send(result.rows);
   })
   .catch(console.error);
-});
 
 app.get(`/api/v1/verify/`, (req, res) => {
   client.query(`SELECT name FROM accounts WHERE name=${name}`)
   return res.send(result.rows)
   .catch(console.error);
 });
+
 
 
 app.get('*', (req, res) => res.redirect(CLIENT_URL));
