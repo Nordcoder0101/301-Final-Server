@@ -82,7 +82,7 @@ app.post(`/api/v1/newaccount`, (req, res) => {
   client.query(`INSERT INTO accounts
   (${req.query.name}, ${req.query.zip}, ${req.query.email}, ${req.query.password})
   VALUES
-  ('${req.query.name}',${re.query.zip}, '${req.query.email}', '${req.query.email}');`)
+  ('${req.query.name}',${req.query.zip}, '${req.query.email}', '${req.query.email}');`)
   .then( result => {
     console.log(result)
     return res.send(result.rows)
