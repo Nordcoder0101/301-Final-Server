@@ -77,17 +77,13 @@ app.get(`/api/v1/verify`, (req, res) => {
 .catch(console.error);
 });
 
-app.post(`/api/v1/newaccount`, (req, res) => {
+app.get(`/api/v1/newaccount`, (req, res) => {
   console.log(req)
   client.query(`INSERT INTO accounts
-  (${req.query.name}, ${req.query.zip}, ${req.query.email}, ${req.query.password})
+  (${req.query.name}, '${req.query.zip}', ${req.query.email}, ${req.query.password})
   VALUES
-  ('${req.query.name}',${req.query.zip}, '${req.query.email}', '${req.query.email}');`)
-  .then( result => {
-    console.log(result)
-    return res.send(result.rows)
-})
-.catch(console.error);
+  ('${req.query.name}','${req.query.zip}', '${req.query.email}', '${req.query.email}');`)
+  .catch(console.error);
 });
 
 
