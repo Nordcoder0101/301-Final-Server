@@ -67,7 +67,7 @@ app.post('/api/v1/newaccount/', (req, res) => {
 });
 
 app.get(`/api/v1/verify/`, (req, res) => {
-  client.query(`SELECT name FROM accounts WHERE name=${req.params.name}`)
+  client.query(`SELECT name FROM accounts WHERE name=${req.params.name};`)
   .then( result => {
     console.log(result.rows)
     return res.send(result.rows)
