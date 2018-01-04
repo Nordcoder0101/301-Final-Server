@@ -78,7 +78,7 @@ app.get(`/api/v1/verify`, (req, res) => {
 });
 
 app.get(`/api/v1/newaccount`, (req, res) => {
-  console.log(req)
+  console.log(req.query)
   client.query(`INSERT INTO accounts
   (${req.query.name}, '${req.query.zip}', ${req.query.email}, ${req.query.password})
   VALUES
