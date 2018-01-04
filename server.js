@@ -82,7 +82,11 @@ app.get(`/api/v1/newaccount`, (req, res) => {
   client.query(`INSERT INTO accounts
   (name, zip, email, password)
   VALUES
-  ('${req.query.name}','${req.query.zip}', '${req.query.email}', '${req.query.email}');`)
+  ('${req.query.name}','${req.query.zip}', '${req.query.email}', '${req.query.password}');`)
+  .then( result => {
+    console.log(result)
+    return res.send(result.rows)
+})
   .catch(console.error);
 });
 
