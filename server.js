@@ -44,6 +44,7 @@ app.get('/api/v1/weather', (req, res) => {
 // });
 
 app.get('/api/v1/accounts', (req, res) => {
+  console.log()
   client.query(`SELECT * FROM accounts;`)
     .then(result => {
       console.log(result.rows);
@@ -57,16 +58,16 @@ app.get('/api/v1/accounts', (req, res) => {
 //   client.query(`INSERT INTO books (title, author, image_url, isbn) VALUES ($!, $2, $3, $4);`, [req.params.title, req.params.author, req.params.image_url, req.params.isbn]);
 // });
 
-app.post('/api/v1/newaccount/', (req, res) => {
-  client.query(`INSERT INTO accounts (name, zip, email, password) VALUES ($!, $2, $3, $4);`, [req.params.name, req.params.zip, req.params.email, req.params.password])
-  .then( result => {
-    console.log(result.rows);
-    return res.send(result.rows);
-  })
-  .catch(console.error);
-});
+// app.post('/api/v1/newaccount/', (req, res) => {
+//   client.query(`INSERT INTO accounts (name, zip, email, password) VALUES ($!, $2, $3, $4);`, [req.params.name, req.params.zip, req.params.email, req.params.password])
+//   .then( result => {
+//     console.log(result.rows);
+//     return res.send(result.rows);
+//   })
+//   .catch(console.error);
+// });
 
-app.get(`/api/v1/verify/`, (req, res) => {
+app.get(`/api/v1/verify`, (req, res) => {
   console.log(req.params)
   client.query(`SELECT name FROM accounts WHERE name=${req.params.name};`)
   .then( result => {
