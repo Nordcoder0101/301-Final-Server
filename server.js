@@ -68,7 +68,7 @@ app.get('/api/v1/accounts', (req, res) => {
 // });
 
 app.get(`/api/v1/verify`, (req, res) => {
-  console.log(req)
+  console.log(req.query.name)
   client.query(`SELECT name FROM accounts WHERE name=${req.query.name};`)
   .then( result => {
     console.log(result.rows)
