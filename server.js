@@ -16,9 +16,9 @@ const DATABASE_URL = process.env.DATABASE_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
 
 //DATABASE setup.
-const client = new pg.Client(DATABASE_URL);
-client.connect();
-client.on('error', err => console.error(err));
+// const client = new pg.Client(DATABASE_URL);
+// client.connect();
+// client.on('error', err => console.error(err));
 
 app.use(cors());
 
@@ -57,11 +57,16 @@ app.get('/api/v1/accounts', (req, res) => {
 //   client.query(`INSERT INTO books (title, author, image_url, isbn) VALUES ($!, $2, $3, $4);`, [req.params.title, req.params.author, req.params.image_url, req.params.isbn]);
 // });
 
-app.post('/api/v1/newaccount/', (req) => {
-  client.query(`INSERT INTO accounts (name, zip, email, password) VALUES ($!, $2, $3, $4);`, [req.params.name, req.params.zip, req.params.email, req.params.password]);
+app.post('/api/v1/newaccount/', (req, res) => {
+  client.query(`INSERT INTO accounts (name, zip, email, password) VALUES ($!, $2, $3, $4);`, [req.params.name, req.params.zip, req.params.email, req.params.password])
+  .then( result => {
+    console.log(result.rows);
+    return res.send(result.rows);
+  })
+  .catch(console.error);
 });
 
-app.get(`/api/v1/verify/`, (req) => {
+app.get(`/api/v1/verify/`, (req, res) => {
   client.query(`SELECT name FROM accounts WHERE name=${name}`)
   return res.send(result.rows)
   .catch(console.error);
