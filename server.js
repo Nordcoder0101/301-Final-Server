@@ -85,7 +85,7 @@ app.get(`/api/v1/newaccount`, (req, res) => {
   ('${req.query.name}','${req.query.zip}', '${req.query.email}', '${req.query.password}');`)
   .then( result => {
     console.log(result)
-    return res.send(result.rows)
+    return res.send(result.rowCount)
 })
   .catch(console.error);
 });
