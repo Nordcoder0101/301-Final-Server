@@ -15,10 +15,10 @@ const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
 
-//DATABASE setup.
-// const client = new pg.Client(DATABASE_URL);
-// client.connect();
-// client.on('error', err => console.error(err));
+// DATABASE setup.
+const client = new pg.Client(DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
 
 app.use(cors());
 
