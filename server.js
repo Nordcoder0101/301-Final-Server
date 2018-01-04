@@ -52,7 +52,8 @@ app.get(`/api/v1/verify/`, (req) => {
   client.query(`SELECT name FROM accounts WHERE name=${name}`)
   return res.send(result.rows)
   .catch(console.error);
-}
+});
+
 
 
 app.get('*', (req, res) => res.redirect(CLIENT_URL));
