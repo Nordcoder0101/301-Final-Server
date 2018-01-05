@@ -87,7 +87,10 @@ app.get(`/api/v1/newaccount`, (req, res) => {
     console.log(result)
     return res.send(result)
 })
-  .catch(res.send(console.error);
+  .catch(err => {
+    console.log(err)
+    res.send(err)
+  });
 });
 
 
