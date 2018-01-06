@@ -77,6 +77,22 @@ app.get(`/api/v1/verify`, (req, res) => {
 .catch(console.error);
 });
 
+app.get(`/api/v1/newaccount`, (req, res) => {
+  console.log(req.query)
+  client.query(`INSERT INTO accounts
+  (name, zip, email, password)
+  VALUES
+  ('${req.query.name}','${req.query.zip}', '${req.query.email}', '${req.query.password}');`)
+  .then( result => {
+    console.log(result)
+    return res.send(result)
+})
+  .catch(err => {
+    console.log(err)
+    res.send(err)
+  });
+});
+
 
 app.get('*', (req, res) => res.redirect(CLIENT_URL));
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
