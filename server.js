@@ -30,18 +30,13 @@ app.get('/api/v1/weather', (req, res) => {
 
 
 //this does nothing for us
-// app.get('/api/v1/location', (req, res) => {
-//   superAgent.get(`http://maps.googleapis.com/maps/api/geocode/json?address=98125`)
-//   .then(results => console.log(results))  
-//   .then( results => {return res.send(results)})
-// });
+app.get('/api/v1/location', (req, res) => {
+  console.log(req.params)
+  superAgent.get(`http://maps.googleapis.com/maps/api/geocode/json?address=98125`)
+  // .then(results => console.log(results))  
+  .then( results => {return res.send(results)})
+});
 
-
-// app.get('/accounts', (req, res) => {
-//   client.query(`SELECT id, name, email, zip;`)
-//     .then(results => res.send(results.rows))
-//     .catch(console.error);
-// });
 
 app.get('/api/v1/accounts', (req, res) => {
   console.log()
@@ -53,19 +48,6 @@ app.get('/api/v1/accounts', (req, res) => {
     })
     .catch(console.error);
 });
-
-// app.post('/api/v1/books/', (req) => {
-//   client.query(`INSERT INTO books (title, author, image_url, isbn) VALUES ($!, $2, $3, $4);`, [req.params.title, req.params.author, req.params.image_url, req.params.isbn]);
-// });
-
-// app.post('/api/v1/newaccount/', (req, res) => {
-//   client.query(`INSERT INTO accounts (name, zip, email, password) VALUES ($!, $2, $3, $4);`, [req.params.name, req.params.zip, req.params.email, req.params.password])
-//   .then( result => {
-//     console.log(result.rows);
-//     return res.send(result.rows);
-//   })
-//   .catch(console.error);
-// });
 
 app.get(`/api/v1/verify`, (req, res) => {
   console.log(req.query.name)
