@@ -31,8 +31,8 @@ app.get('/api/v1/weather', (req, res) => {
 
 //this does nothing for us
 app.get('/api/v1/location', (req, res) => {
-  console.log(req.params)
-  superAgent.get(`http://maps.googleapis.com/maps/api/geocode/json?address=98125`)
+  console.log(req.query)
+  superAgent.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${req.query.zip}`)
   // .then(results => console.log(results))  
   .then( results => {return res.send(results)})
 });
